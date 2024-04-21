@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
+import './i18n'
 import "./index.css";
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -16,5 +17,5 @@ postMessage({ payload: "removeLoading" }, "*");
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 window.ipcRenderer.on("main-process-message", (_event, message) => {
-  console.log(message);
+  console.log("IPC TIME: ", message);
 });
