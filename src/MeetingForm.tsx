@@ -1,23 +1,35 @@
 import { RefObject, useEffect, useState } from "react";
 
-import { Box, Form, Button, FormField, Heading, Grid, TextInput } from "grommet";
+import {
+  Box,
+  Form,
+  Button,
+  FormField,
+  Heading,
+  Grid,
+  TextInput,
+  Select,
+  Text,
+} from "grommet";
 import { Add, Trash } from "grommet-icons";
 import Translator from "./components/Translator";
 import { useDialogStore } from "./store/dialogStore";
 import { Part } from "./types/Part";
 import { Section } from "./types/Section";
+import { applyFieldMinistryParts } from "./assets/data/applyFieldMinistry";
+import i18next from "i18next";
 
 const MeetingForm = ({
   section,
   onPartChange,
   data,
-  reference
+  reference,
 }: {
   section: number;
   onPartChange: (value: Part) => void;
-  reference: RefObject<HTMLFormElement>
-  data: Section
-}) => {  
+  reference: RefObject<HTMLFormElement>;
+  data: Section;
+}) => {
   const [sectionTitle, setSectionTitle] = useState("");
   const [sectionColor, setSectionColor] = useState("");
 
@@ -29,7 +41,6 @@ const MeetingForm = ({
       case 1:
         setSectionTitle("section.treasures");
         setSectionColor("#2a6b77");
-        console.log(data);
         break;
 
       case 2:
@@ -51,11 +62,10 @@ const MeetingForm = ({
     if (data) {
       setSection({
         section: data.section,
-        value: data.value
+        value: data.value,
       });
     }
-  }, [data])
-  
+  }, [data]);
 
   const [meetingSection, setSection] = useState<Section>({
     section: undefined,
@@ -72,12 +82,13 @@ const MeetingForm = ({
   };
 
   const addPart = () => {
-    const newPart = {index: 0, partName: ''};
+    const newPart = { index: 0, partName: "" };
     const newParts = [...meetingSection.value, newPart];
     setSection({
       ...meetingSection,
       value: newParts,
     });
+    console.log(meetingSection);
   };
 
   const removePart = (index: number) => {
@@ -88,6 +99,10 @@ const MeetingForm = ({
       });
     }
   };
+
+  const renderApplyFieldMinistryPart = (part: Part) => (
+    <Text>{part.partName}</Text>
+  );
 
   let partsGroup = null;
   if (meetingSection.value !== undefined) {
@@ -103,7 +118,19 @@ const MeetingForm = ({
           placeholder={<Translator path="section.partName" />}
           onBlur={(e) => onPartChange({ index, partName: e.target.value })}
         >
-          <TextInput placeholder="type here" defaultValue={part.partName}/>
+          {section === 2 ? (
+            <Select
+              options={applyFieldMinistryParts(i18next.language)}
+              placeholder="Select a Part"
+              defaultValue={
+                <Translator path={`applyFieldMinistry.${part.slug}`} />
+              }
+            >
+              {renderApplyFieldMinistryPart}
+            </Select>
+          ) : (
+            <TextInput placeholder="type here" defaultValue={part.partName} />
+          )}
         </FormField>
 
         <Box>
@@ -122,11 +149,7 @@ const MeetingForm = ({
   return (
     <>
       <Box fill>
-        <Form
-          ref={reference}
-          value={meetingSection}
-          validate="blur"
-        >
+        <Form ref={reference} value={meetingSection} validate="blur">
           <Heading level={4} style={{ backgroundColor: sectionColor }}>
             <Translator path={sectionTitle!} />
           </Heading>

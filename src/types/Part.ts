@@ -1,5 +1,6 @@
 export interface Part {
-    index: number;
+    index?: number;
     partName: string;
+    slug?: string;
   }
   

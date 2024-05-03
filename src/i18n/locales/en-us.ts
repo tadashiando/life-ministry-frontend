@@ -11,6 +11,15 @@ export default {
         add: "Add Part",
         remove: "Remove",
         partName: "Part"
+      },
+      applyFieldMinistry: {
+        d: 'Discussion',
+        br: 'Bible reading',
+        sc: 'Starting a Conversation',
+        fu: 'Following Up',
+        md: 'Making Disciples',
+        eb: 'Explaining Your Beliefs',
+        t: 'Talk'  
       }
     }
   }

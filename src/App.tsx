@@ -93,10 +93,12 @@ function App() {
     setState: (state: Section) => void,
     value: Part
   ) => {
+    console.log(value);
     const foundIndex =
       state && state.value.findIndex((x) => x.index == value.index);
     state.value[foundIndex < 0 ? value.index : foundIndex] = value;
     setState(state);
+    
   };
 
   const resetAll = () => {

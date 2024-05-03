@@ -10,7 +10,16 @@ export default {
         livingChristians: 'Nossa vida Cristã',
         add: "Adicionar parte",
         remove: "Remover",
-        partName: "Tema"
+        partName: "Tema",
+      },
+      applyFieldMinistry: {
+        d: 'Consideração',
+        br: 'Leitura da Bíblia',
+        sc: 'Iniciando Conversas',
+        fu: 'Cultivando o Interesse',
+        md: 'Fazendo Discípulos',
+        eb: 'Explicando suas Crenças',
+        t: 'Discurso'  
       }
     }
   }
