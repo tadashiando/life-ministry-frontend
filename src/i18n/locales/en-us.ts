@@ -12,9 +12,12 @@ export default {
         remove: "Remove",
         partName: "Part"
       },
+      treasures: {
+        sg: "Spiritual Gems",
+        br: 'Bible reading'
+      },
       applyFieldMinistry: {
         d: 'Discussion',
-        br: 'Bible reading',
         sc: 'Starting a Conversation',
         fu: 'Following Up',
         md: 'Making Disciples',

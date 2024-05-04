@@ -17,7 +17,7 @@ import { useDialogStore } from "./store/dialogStore";
 import { Part } from "./types/Part";
 import { Section } from "./types/Section";
 import { applyFieldMinistryParts } from "./assets/data/applyFieldMinistry";
-import i18next from "i18next";
+import i18next, { t } from "i18next";
 
 const MeetingForm = ({
   section,
@@ -88,7 +88,6 @@ const MeetingForm = ({
       ...meetingSection,
       value: newParts,
     });
-    console.log(meetingSection);
   };
 
   const removePart = (index: number) => {
@@ -116,7 +115,6 @@ const MeetingForm = ({
         <FormField
           name={`partNames[${index}]`}
           placeholder={<Translator path="section.partName" />}
-          onBlur={(e) => onPartChange({ index, partName: e.target.value })}
         >
           {section === 2 ? (
             <Select
@@ -125,11 +123,24 @@ const MeetingForm = ({
               defaultValue={
                 <Translator path={`applyFieldMinistry.${part.slug}`} />
               }
+              onChange={(e) =>
+                onPartChange({
+                  index,
+                  partName: e.option.partName,
+                  slug: e.option.slug,
+                })
+              }
             >
               {renderApplyFieldMinistryPart}
             </Select>
           ) : (
-            <TextInput placeholder="type here" defaultValue={part.partName} />
+            <TextInput
+              placeholder="type here"
+              defaultValue={part.partName}
+              onChange={(e) =>
+                onPartChange({ index, partName: e.target.value })
+              }
+            />
           )}
         </FormField>
 
@@ -154,6 +165,30 @@ const MeetingForm = ({
             <Translator path={sectionTitle!} />
           </Heading>
           {partsGroup}
+          {section === 1 && (
+            <>
+              <Grid
+                columns={["3/4", "1/4"]}
+                fill="horizontal"
+                align="center"
+                key={1}
+              >
+                <FormField>
+                  <TextInput readOnly defaultValue={t("treasures.sg")} />
+                </FormField>
+              </Grid>
+              <Grid
+                columns={["3/4", "1/4"]}
+                fill="horizontal"
+                align="center"
+                key={2}
+              >
+                <FormField>
+                  <TextInput readOnly defaultValue={t("treasures.br")} />
+                </FormField>
+              </Grid>
+            </>
+          )}
           <Button
             icon={<Add />}
             label={<Translator path="section.add" />}

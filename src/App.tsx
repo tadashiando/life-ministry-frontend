@@ -136,9 +136,6 @@ function App() {
   }, [calDate]);
 
   const getMeeting = () => {
-    console.log("Year: ", formattedYear);
-    console.log("Week: ", weekNumber);
-
     api
       .get(`/meetings/${formattedYear}${weekNumber}`)
       .then((response) => {

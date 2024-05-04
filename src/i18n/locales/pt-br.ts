@@ -12,9 +12,12 @@ export default {
         remove: "Remover",
         partName: "Tema",
       },
+      treasures: {
+        sg: "Joias Espirituais",
+        br: 'Leitura da Bíblia'
+      },
       applyFieldMinistry: {
         d: 'Consideração',
-        br: 'Leitura da Bíblia',
         sc: 'Iniciando Conversas',
         fu: 'Cultivando o Interesse',
         md: 'Fazendo Discípulos',
